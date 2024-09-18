@@ -19,5 +19,7 @@ i3-msg reload > /dev/null
 cat "$BASEDIR/alacritty_colors" > "$CONFIG_DIR/alacritty/alacritty_tmp"
 tail -30 "$CONFIG_DIR/alacritty/alacritty.toml" >> "$CONFIG_DIR/alacritty/alacritty_tmp" 
 mv "$CONFIG_DIR/alacritty/alacritty_tmp" "$CONFIG_DIR/alacritty/alacritty.toml"
-#mv "$BASEDIR/polybar_colors" "$CONFIG_DIR/polybar"
+cp "$BASEDIR/polybar_colors" "$CONFIG_DIR/polybar"
+"$CONFIG_DIR"/polybar/launch.sh
+cp "$BASEDIR/rofi_colors" "$CONFIG_DIR/rofi/rofi_colors.rasi"
 #mv "$BASEDIR/tmux_colors" "$CONFIG_DIR/tmux/tmux_colors.conf"

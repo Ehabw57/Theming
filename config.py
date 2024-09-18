@@ -1,6 +1,6 @@
 theme_sources = {
         'i3': 'tinted-theming/base16-i3/main/colors/base16-',
-        'alacritty': "aarowill/base16-alacritty/master/colors/base16-",
+        'alacritty': "tinted-theming/tinted-alacritty/master/colors/base16-",
         'dunst': "tinted-theming/base16-dunst/master/themes/base16-",
         'polybar': "tinted-theming/base16-polybar/main/colors/base16-",
         'rofi': "tinted-theming/base16-rofi/master/colors/base16-",

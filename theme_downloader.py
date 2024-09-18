@@ -35,6 +35,8 @@ class ThemeDownloader:
 
         response = requests.get(url)
         if response.status_code != 200:
+            print(url)
+            print(f"Failed to download code {response.status_code}")
             return 1
 
         with open(f"{self.name}/{output_filename}", "wb") as file:
