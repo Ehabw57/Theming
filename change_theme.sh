@@ -1,25 +1,18 @@
 #!/bin/bash
 # Change the theme of the system
-
-CONFIG_DIR="$HOME/.config"
 if [ -n "$1" ]; then
-	BASEDIR="$1"
+	THEME="$1"
 else
-	BASEDIR=$(./main.py | rofi -dmenu -p "Select theme")
-	if [ -z "$BASEDIR" ]; then
+	THEME=$(./download_theme.py | rofi -dmenu -p "Select theme")
+	if [ -z "$THEME" ]; then
 		exit 0
 	fi
+	if [ ! -e "colors/$THEME.hex" ]; then
+		./download_theme.py "$THEME"
+		./format_hex_file.py "$(realpath "colors/$THEME")" > "colors/$THEME.hex"
+		rm "colors/$THEME"
+	fi
+	./generate_theme.py "$(realpath "colors/$THEME.hex")"
 fi
-
-echo "Changing theme to $BASEDIR"
-./main.py "$BASEDIR"
-
-cp "$BASEDIR/i3_colors" "$CONFIG_DIR/i3"
-i3-msg reload > /dev/null
-cat "$BASEDIR/alacritty_colors" > "$CONFIG_DIR/alacritty/alacritty_tmp"
-tail -30 "$CONFIG_DIR/alacritty/alacritty.toml" >> "$CONFIG_DIR/alacritty/alacritty_tmp" 
-mv "$CONFIG_DIR/alacritty/alacritty_tmp" "$CONFIG_DIR/alacritty/alacritty.toml"
-cp "$BASEDIR/polybar_colors" "$CONFIG_DIR/polybar"
-"$CONFIG_DIR"/polybar/launch.sh
-cp "$BASEDIR/rofi_colors" "$CONFIG_DIR/rofi/rofi_colors.rasi"
-#mv "$BASEDIR/tmux_colors" "$CONFIG_DIR/tmux/tmux_colors.conf"
+pgrep polybar && killall polybar >/dev/null
+bspc wm -r
