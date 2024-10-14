@@ -42,6 +42,10 @@ def generate_alacritty(colors):
 background = '{colors[0]}'
 foreground = '{colors[7]}'
 
+[colors.cursor]
+text = '{colors[11]}'
+cursor = '{colors[6]}'
+
 [colors.normal]
 black = '{colors[0]}'
 red = '{colors[1]}'

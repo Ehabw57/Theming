@@ -15,4 +15,5 @@ else
 	./generate_theme.py "$(realpath "colors/$THEME.hex")"
 fi
 pgrep polybar && killall polybar >/dev/null
+sleep 0.2
 bspc wm -r
